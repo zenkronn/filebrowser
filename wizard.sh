@@ -53,9 +53,9 @@ dockerLogout () {
 }
 
 dockerPushLatest () {
-  docker build -t filebrowser/filebrowser .
+  docker build -t filebrowser/filebrowser:issue-681 .
   dockerLogin
-  docker push filebrowser/filebrowser
+  docker push filebrowser/filebrowser:issue-681
   dockerLogout
 }
 

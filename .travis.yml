@@ -29,7 +29,7 @@ jobs:
       on:
         tags: false
         repo: filebrowser/filebrowser
-        branch: master
+        branch: fix-isbinary
   - stage: release
     script: ./wizard.sh -r "$TRAVIS_TAG"
     if: tag IS present
