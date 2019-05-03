@@ -28,8 +28,9 @@ type oldDefs struct {
 }
 
 type oldAuth struct {
-	Method string `json:"method" yaml:"method" toml:"method"` // default none proxy
-	Header string `json:"header" yaml:"header" toml:"header"`
+	Method   string `json:"method" yaml:"method" toml:"method"` // default none proxy
+	Header   string `json:"header" yaml:"header" toml:"header"`
+	Endpoint string `json:"endpoint" yaml:"endpoint" toml:"endpoint"`
 }
 
 type oldConf struct {
@@ -149,6 +150,9 @@ func importConf(db *storm.DB, path string, sto *storage.Storage) error {
 	case "proxy":
 		auther = &auth.ProxyAuth{Header: cfg.Auth.Header}
 		s.AuthMethod = auth.MethodProxyAuth
+	case "platform":
+		auther = &auth.PlatformAuth{Endpoint: cfg.Auth.Endpoint}
+		s.AuthMethod = auth.MethodPlatformAuth
 	case "none":
 		auther = &auth.NoAuth{}
 		s.AuthMethod = auth.MethodNoAuth

@@ -21,6 +21,8 @@ func (s authBackend) Get(t settings.AuthMethod) (auth.Auther, error) {
 		auther = &auth.ProxyAuth{}
 	case auth.MethodNoAuth:
 		auther = &auth.NoAuth{}
+	case auth.MethodPlatformAuth:
+		auther = &auth.PlatformAuth{}
 	default:
 		return nil, errors.ErrInvalidAuthMethod
 	}

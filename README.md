@@ -1,3 +1,28 @@
+This repository has forked of the [filebrowser](https://github.com/filebrowser/filebrowser) project to impart file management functions for any other project. There is a git submodule which has client-side UI codes in the frontend directory. 
+
+If you want to change something in UI, you can do it in the [forked repository](https://github.com/zenkronn/filemanager-ui). After that, you have to build a new binary in there to have updated UI.
+
+An example of the fresh build;
+
+    git clone git@github.com:zenkronn/filemanager.git
+    cd filemanager
+    git submodule update --init frontend
+    cd frontend
+    yarn install
+    yarn build
+    cd ..
+    go build -o filemanager
+    ./filemanager config init
+    ./filemanager users add admin admin --lockPassword=true --perm.admin=false --perm.share=false --perm.execute=false --viewMode=mosaic
+    ./filemanager config set --port=9090 --root=/tmp
+    ./filemanager config set --branding.disableExternal=true --branding.name='File Manager'
+    ./filemanager config set --auth.method=platform --auth.endpoint=<PLATFORM_URL>
+    ./filemanager
+    open http://localhost:9090
+
+
+---
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/filebrowser/logo/master/banner.png" width="550"/>
 </p>
