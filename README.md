@@ -11,6 +11,9 @@ An example of the fresh build;
     yarn install
     yarn build
     cd ..
+    cd http
+    rice embed-go
+    cd ..
     go build -o filemanager
     ./filemanager config init
     ./filemanager users add admin admin --lockPassword=true --perm.admin=false --perm.share=false --perm.execute=false --viewMode=mosaic
