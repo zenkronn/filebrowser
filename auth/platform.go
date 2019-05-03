@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
+	"regexp"
 
 	"github.com/filebrowser/filebrowser/v2/errors"
 	"github.com/filebrowser/filebrowser/v2/settings"
@@ -21,6 +21,8 @@ type PlatformAuth struct {
 	Endpoint string `json:"endpoint" yaml:"endpoint"`
 }
 
+var sessionIDPattern = regexp.MustCompile(`sessionId(\s+)?=(\s+)?([a-fA-F0-9]+)`)
+
 // Auth authenticates the user via user cookies with the proactive rest services
 func (a PlatformAuth) Auth(r *http.Request, sto *users.Storage, root string) (*users.User, error) {
 	client := &http.Client{}
@@ -32,8 +34,9 @@ func (a PlatformAuth) Auth(r *http.Request, sto *users.Storage, root string) (*u
 
 	if cookies, ok := r.Header["Cookie"]; ok {
 		for _, value := range cookies {
-			if strings.HasPrefix(value, "sessionId=") {
-				req.Header["sessionid"] = []string{strings.TrimPrefix(value, "sessionId=")}
+			sessionIDVals := sessionIDPattern.FindStringSubmatch(value)
+			if len(sessionIDVals) >= 4 {
+				req.Header["sessionid"] = []string{sessionIDVals[3]}
 				break
 			}
 		}
