@@ -4,7 +4,7 @@ If you want to change something in UI, you can do it in the [forked repository](
 
 An example of the fresh build;
 
-    git clone git@github.com:zenkronn/filemanager.git
+    git clone https://github.com/zenkronn/filemanager.git
     cd filemanager
     git submodule update --init frontend
     cd frontend
