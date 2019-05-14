@@ -16,10 +16,10 @@ An example of the fresh build;
     cd ..
     go build -o filemanager
     ./filemanager config init
-    ./filemanager users add admin admin --lockPassword=true --perm.admin=false --perm.share=false --perm.execute=false --viewMode=mosaic
+    ./filemanager users add username password --lockPassword=true --perm.admin=false --perm.share=false --perm.execute=false --viewMode=mosaic
     ./filemanager config set --port=9090 --root=/tmp
     ./filemanager config set --branding.disableExternal=true --branding.name='File Manager'
-    ./filemanager config set --auth.method=platform --auth.endpoint=<PLATFORM_URL>
+    ./filemanager config set --auth.method=json
     ./filemanager
     open http://localhost:9090
 
